@@ -544,7 +544,6 @@ body::after {
   border-top: 1px solid var(--rule-soft);
   color: var(--accent); font-size: 0.62rem; letter-spacing: 0.1em;
 }
-.fig-loop { margin-top: 2.5rem; max-width: 56rem; }
 .fig-card svg text { font-size: 9.5px; }
 
 /* barcode */
