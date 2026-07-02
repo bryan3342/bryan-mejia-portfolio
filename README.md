@@ -2,16 +2,20 @@
 
 Personal portfolio for Bryan Mejia, Forward Deployed Engineer in New York.
 A zero-build static site: plain HTML, CSS, and vanilla JavaScript — no framework,
-no bundler, no server. All dynamic behavior (neural-network hero canvas, typed
-role rotation, scroll reveals, count-up stats, cursor-tracked cards) runs
-client-side.
+no bundler, no server. Design direction: **Kinetic Brutalist Editorial** — paper,
+ink, and one loud ultramarine; typography is the interface. All dynamic behavior
+runs client-side: per-letter variable-font distortion that follows the cursor,
+scroll-squeezed display type, text scramble, a scroll-velocity-reactive marquee,
+cursor-following project peek cards, magnetic buttons, a difference-blend custom
+cursor, accordion rows, count-up stats, and a live NYC clock.
 
 ## Structure
 
 ```
-index.html    — single-page site (hero / about / experience / projects / skills / leadership / contact)
-styles.css    — design system: deep charcoal + phosphor amber, Space Grotesk / Inter / JetBrains Mono
-main.js       — all interactions; respects prefers-reduced-motion
+index.html    — single-page site (hero / about / work / projects / stack / contact)
+styles.css    — design system: paper #F2EFE6 + ink #101010 + ultramarine #2A1FEA,
+                Archivo variable (wght 100–900 × wdth 62–125) / Instrument Serif / Space Mono
+main.js       — all interactions; degrades under prefers-reduced-motion and on touch
 assets/       — résumé PDF
 netlify.toml  — publish config (no build step)
 ```

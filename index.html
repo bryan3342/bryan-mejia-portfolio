@@ -6,306 +6,320 @@
   <title>Bryan Mejia — Forward Deployed Engineer</title>
   <meta name="description" content="Bryan Mejia is a Forward Deployed Engineer in New York building memory and agentic infrastructure for AI systems — Azure cloud-native platforms, multi-agent systems, and the context layer that makes agents work." />
   <meta property="og:title" content="Bryan Mejia — Forward Deployed Engineer" />
-  <meta property="og:description" content="I build the memory layer for AI agents. Azure cloud-native infrastructure, agent harnesses, and multi-agent systems — in production." />
+  <meta property="og:description" content="Building memory for AI agents. Azure cloud-native infrastructure, agent harnesses, multi-agent systems — in production." />
   <meta property="og:type" content="website" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230C0E12'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='28' font-weight='700' fill='%23FFB454' text-anchor='middle'%3EBM%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23F2EFE6'/%3E%3Ctext x='32' y='44' font-family='monospace' font-size='30' font-weight='700' fill='%232A1FEA' text-anchor='middle'%3EBM%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="progress-bar" aria-hidden="true"><span id="progress"></span></div>
+  <!-- custom cursor (desktop only, activated by JS) -->
+  <div class="cursor" id="cursor" aria-hidden="true"><span id="cursorLabel"></span></div>
 
-  <header class="nav" id="nav">
-    <a class="nav-brand" href="#top" aria-label="Bryan Mejia — home">
-      <span class="brand-mark">BM</span>
-      <span class="brand-text">bryan<span class="brand-dot">.</span>mejia</span>
-    </a>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="#about" data-section="about"><span class="nav-index">01</span>About</a>
-      <a href="#experience" data-section="experience"><span class="nav-index">02</span>Experience</a>
-      <a href="#projects" data-section="projects"><span class="nav-index">03</span>Projects</a>
-      <a href="#skills" data-section="skills"><span class="nav-index">04</span>Skills</a>
-      <a href="#contact" data-section="contact"><span class="nav-index">05</span>Contact</a>
+  <!-- exposed column grid -->
+  <div class="gridlines" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <!-- ============ TOP BAR ============ -->
+  <header class="bar">
+    <a class="bar-brand" href="#top" data-cursor>BRYAN&nbsp;MEJIA<sup>®</sup></a>
+    <nav class="bar-nav" aria-label="Primary">
+      <a href="#about" data-scramble data-cursor>ABOUT</a>
+      <a href="#work" data-scramble data-cursor>WORK</a>
+      <a href="#projects" data-scramble data-cursor>PROJECTS</a>
+      <a href="#stack" data-scramble data-cursor>STACK</a>
+      <a href="#contact" data-scramble data-cursor>CONTACT</a>
     </nav>
-    <a class="btn btn-ghost nav-resume" href="assets/BRYAN_MEJIA_RESUME.pdf" target="_blank" rel="noopener">Résumé</a>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span>
-    </button>
+    <span class="bar-clock mono" id="clock" aria-label="Current time in New York">--:--:--&nbsp;NYC</span>
+    <a class="bar-hire" href="mailto:bryan.mejia3923@gmail.com" data-magnet data-cursor>HIRE&nbsp;ME</a>
   </header>
 
   <main id="top">
     <!-- ============ HERO ============ -->
-    <section class="hero">
-      <canvas id="net" aria-hidden="true"></canvas>
-      <div class="hero-inner">
-        <p class="kicker reveal">New York, NY — Forward Deployed Engineer @ Augenta AI</p>
-        <h1 class="hero-title reveal">Bryan Mejia</h1>
-        <p class="hero-sub reveal">I build <span class="typed-wrap"><span id="typed">memory for AI agents</span><span class="caret" aria-hidden="true"></span></span></p>
-        <p class="hero-lede reveal">
-          Infrastructure engineer for a cloud-native contextual memory platform running in
-          production for enterprise customers — agent harnesses, telemetry pipelines, and the
-          context layer that makes agents cheaper and sharper.
-        </p>
-        <div class="hero-cta reveal">
-          <a class="btn btn-solid" href="#projects">See the work</a>
-          <a class="btn btn-ghost" href="mailto:bryan.mejia3923@gmail.com">Get in touch</a>
-          <div class="hero-social">
-            <a href="https://github.com/bryan3342" target="_blank" rel="noopener" aria-label="GitHub">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.53-1.32-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.75 2.7 1.25 3.36.95.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.78 1.05.78 2.12v3.14c0 .3.2.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
-            </a>
-            <a href="https://linkedin.com/in/bryanmejia15" target="_blank" rel="noopener" aria-label="LinkedIn">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45z"/></svg>
-            </a>
-          </div>
-        </div>
-        <div class="hero-stats reveal">
-          <div class="stat"><span class="stat-num" data-count="24" data-suffix="%">0</span><span class="stat-label">token usage cut via context injection</span></div>
-          <div class="stat"><span class="stat-num" data-count="33" data-prefix="+" data-suffix="%">0</span><span class="stat-label">agent recall improvement</span></div>
-          <div class="stat"><span class="stat-num" data-count="2" data-suffix="">0</span><span class="stat-label">enterprise customers in production</span></div>
-          <div class="stat"><span class="stat-num" data-count="85" data-suffix="%+">0</span><span class="stat-label">detection accuracy, multi-agent auditor</span></div>
+    <section class="hero" id="hero">
+      <div class="hero-meta mono r">
+        <span>FORWARD DEPLOYED ENGINEER</span>
+        <span>PORTFOLIO — 2026 EDITION</span>
+        <span>40.7128° N / 74.0060° W</span>
+      </div>
+      <h1 class="hero-name" aria-label="Bryan Mejia">
+        <span class="hero-line r" data-kinetic aria-hidden="true"><i class="k">B</i><i class="k">R</i><i class="k">Y</i><i class="k">A</i><i class="k">N</i></span>
+        <span class="hero-line hero-line-2 r" data-kinetic aria-hidden="true"><i class="k">M</i><i class="k">E</i><i class="k">J</i><i class="k">I</i><i class="k">A</i></span>
+      </h1>
+      <div class="hero-foot">
+        <p class="hero-tag r">Building <em class="serif">memory</em> for AI agents — the context layer that makes them <em class="serif">cheaper</em> &amp; <em class="serif">sharper</em>.</p>
+        <div class="hero-status r">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span class="mono">CURRENTLY — AUGENTA AI, NYC</span>
         </div>
       </div>
-      <a class="scroll-hint" href="#about" aria-label="Scroll to about"><span></span></a>
+      <span class="hero-scroll mono" aria-hidden="true">SCROLL&nbsp;↓</span>
     </section>
 
-    <!-- ============ ABOUT ============ -->
-    <section class="section" id="about">
-      <div class="section-head reveal">
-        <span class="section-index">01</span>
-        <h2>About</h2>
-        <span class="section-rule"></span>
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track" id="marquee">
+        <span>MEMORY FOR AI AGENTS ✦ AGENT HARNESSES ✦ OTEL → EVENT HUBS ✦ MULTI-AGENT RAG ✦ AZURE CLOUD-NATIVE ✦ CONTEXT INJECTION ✦&nbsp;</span>
+        <span>MEMORY FOR AI AGENTS ✦ AGENT HARNESSES ✦ OTEL → EVENT HUBS ✦ MULTI-AGENT RAG ✦ AZURE CLOUD-NATIVE ✦ CONTEXT INJECTION ✦&nbsp;</span>
       </div>
-      <div class="about-grid">
-        <div class="about-copy reveal">
-          <p>
-            I'm a Forward Deployed Engineer at <strong>Augenta AI</strong> in New York, where I lead
-            infrastructure for an <strong>Azure cloud-native contextual memory platform</strong>
-            deployed in production for two enterprise customers. My work sits at the layer where AI
-            agents stop being demos and start being systems: telemetry pipelines, memory engines,
-            and lifecycle-hook context injection that reuses shared context across users, agents,
-            and sessions.
-          </p>
-          <p>
-            I completed my B.A. in Computer Science at <strong>CUNY Queens College</strong> (May 2026)
-            and was competitively selected as a fellow in the <strong>Google-backed BASTA software
-            engineering fellowship</strong>, with direct mentorship from a Google Cloud engineer.
-          </p>
-          <p>
-            Outside the day job I build multi-agent systems end to end — an AI code auditor on the
-            Anthropic Claude API, a real-time multimodal debate coach, and an ML-powered health
-            prediction app.
-          </p>
+    </div>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="sec" id="about">
+      <header class="sec-head r">
+        <span class="mono sec-index">01</span>
+        <h2 data-scramble-reveal>ABOUT</h2>
+        <span class="mono sec-note">WHO / WHY</span>
+      </header>
+      <div class="about-lede r">
+        <p>
+          I'm a Forward Deployed Engineer at <strong>Augenta AI</strong>, where I lead infrastructure
+          for an <strong>Azure cloud-native contextual memory platform</strong> running in production
+          for two enterprise customers. I work at the layer where AI agents stop being demos and
+          start being systems — telemetry pipelines, memory engines, and lifecycle-hook context
+          injection that reuses shared context across users, agents, and sessions.
+        </p>
+        <p>
+          B.A. in Computer Science, <strong>CUNY Queens College</strong> (May 2026). Fellow of the
+          Google-backed <strong>BASTA software engineering fellowship</strong>, mentored by a Google
+          Cloud engineer. Outside the day job I build multi-agent systems end to end.
+        </p>
+      </div>
+      <div class="stats r">
+        <div class="stat">
+          <span class="stat-n" data-count="24" data-suffix="%">0</span>
+          <span class="mono stat-l">TOKEN SPEND CUT VIA CONTEXT INJECTION</span>
         </div>
-        <aside class="about-facts reveal">
-          <div class="fact"><span class="fact-key">Currently</span><span class="fact-val">Forward Deployed Engineer, Augenta AI</span></div>
-          <div class="fact"><span class="fact-key">Education</span><span class="fact-val">B.A. Computer Science, CUNY Queens College — May 2026</span></div>
-          <div class="fact"><span class="fact-key">Fellowship</span><span class="fact-val">Google SWE Fellowship (BASTA), 2026</span></div>
-          <div class="fact"><span class="fact-key">Focus</span><span class="fact-val">Agentic systems · Memory infrastructure · Cloud platforms</span></div>
-          <div class="fact"><span class="fact-key">Location</span><span class="fact-val">New York, NY</span></div>
-        </aside>
+        <div class="stat">
+          <span class="stat-n" data-count="33" data-prefix="+" data-suffix="%">0</span>
+          <span class="mono stat-l">AGENT RECALL IMPROVEMENT</span>
+        </div>
+        <div class="stat">
+          <span class="stat-n" data-count="2" data-prefix="×">0</span>
+          <span class="mono stat-l">ENTERPRISE CUSTOMERS IN PRODUCTION</span>
+        </div>
+        <div class="stat">
+          <span class="stat-n" data-count="85" data-suffix="%+">0</span>
+          <span class="mono stat-l">DETECTION ACCURACY, MULTI-AGENT AUDITOR</span>
+        </div>
       </div>
     </section>
 
     <!-- ============ EXPERIENCE ============ -->
-    <section class="section" id="experience">
-      <div class="section-head reveal">
-        <span class="section-index">02</span>
-        <h2>Experience</h2>
-        <span class="section-rule"></span>
-      </div>
-      <div class="timeline">
-        <article class="tl-item reveal">
-          <div class="tl-meta">
-            <span class="tl-date">Jan 2026 — Present</span>
-            <span class="tl-loc">New York, NY</span>
-          </div>
-          <div class="tl-body">
-            <h3>Forward Deployed Engineer <span class="tl-org">· Augenta AI</span></h3>
+    <section class="sec" id="work">
+      <header class="sec-head r">
+        <span class="mono sec-index">02</span>
+        <h2 data-scramble-reveal>WORK</h2>
+        <span class="mono sec-note">CLICK ROW TO EXPAND</span>
+      </header>
+
+      <article class="xrow r">
+        <button class="xrow-head" aria-expanded="false" data-cursor="open">
+          <span class="mono xrow-idx">A</span>
+          <span class="xrow-role">FORWARD DEPLOYED ENGINEER</span>
+          <span class="xrow-org serif">Augenta AI</span>
+          <span class="mono xrow-date">JAN 2026 — NOW</span>
+          <span class="xrow-plus" aria-hidden="true">+</span>
+        </button>
+        <div class="xrow-body">
+          <div class="xrow-inner">
             <ul>
-              <li>Lead infrastructure engineer for an <strong>Azure cloud-native contextual memory platform</strong> deployed in production for two enterprise customers.</li>
-              <li>Developed a plugin for multiple agent harnesses capturing agent trajectories and user-agent interactions, streaming telemetry through an <strong>OpenTelemetry → Event Hubs</strong> producer/consumer buffer into a downstream memory engine.</li>
-              <li>Engineered <strong>lifecycle-hook context injection</strong> that reuses shared context across users, agents, and sessions — cutting token usage by <strong>24%</strong> and improving agent recall by <strong>33%</strong>.</li>
+              <li>Lead infrastructure engineer for an Azure cloud-native contextual memory platform deployed in production for two enterprise customers.</li>
+              <li>Developed a plugin for multiple agent harnesses capturing agent trajectories and user-agent interactions — telemetry streamed through an OpenTelemetry → Event Hubs producer/consumer buffer into a downstream memory engine.</li>
+              <li>Engineered lifecycle-hook context injection reusing shared context across users, agents, and sessions — cutting token usage by 24% and improving agent recall by 33%.</li>
             </ul>
-            <div class="tag-row">
-              <span class="tag">Azure</span><span class="tag">Event Hubs</span><span class="tag">Container Apps</span><span class="tag">OpenTelemetry</span><span class="tag">TypeScript</span><span class="tag">Agent Harnesses</span>
-            </div>
+            <p class="mono xrow-tags">AZURE · EVENT HUBS · CONTAINER APPS · OPENTELEMETRY · TYPESCRIPT · AGENT HARNESSES</p>
           </div>
-        </article>
-        <article class="tl-item reveal">
-          <div class="tl-meta">
-            <span class="tl-date">Jun 2022 — Apr 2026</span>
-            <span class="tl-loc">New York, NY</span>
-          </div>
-          <div class="tl-body">
-            <h3>Operations Assistant <span class="tl-org">· MQ Steel Corp</span></h3>
+        </div>
+      </article>
+
+      <article class="xrow r">
+        <button class="xrow-head" aria-expanded="false" data-cursor="open">
+          <span class="mono xrow-idx">B</span>
+          <span class="xrow-role">OPERATIONS ASSISTANT</span>
+          <span class="xrow-org serif">MQ Steel Corp</span>
+          <span class="mono xrow-date">JUN 2022 — APR 2026</span>
+          <span class="xrow-plus" aria-hidden="true">+</span>
+        </button>
+        <div class="xrow-body">
+          <div class="xrow-inner">
             <ul>
-              <li>Optimized cross-functional project workflows across <strong>25+ active client accounts</strong>, reducing average turnaround time by <strong>15%</strong> through process standardization and task coordination.</li>
-              <li>Maintained a 25+ account client database with <strong>100% accuracy</strong> in financial record-keeping, processing <strong>$500K+</strong> in annual transactions.</li>
+              <li>Optimized cross-functional project workflows across 25+ active client accounts, reducing average turnaround time by 15% through process standardization and task coordination.</li>
+              <li>Maintained a 25+ account client database with 100% accuracy in financial record-keeping, processing $500K+ in annual transactions.</li>
             </ul>
-            <div class="tag-row">
-              <span class="tag">Operations</span><span class="tag">Process Design</span><span class="tag">Financial Records</span>
-            </div>
+            <p class="mono xrow-tags">OPERATIONS · PROCESS DESIGN · FINANCIAL RECORDS</p>
           </div>
-        </article>
-      </div>
+        </div>
+      </article>
+
+      <article class="xrow r">
+        <button class="xrow-head" aria-expanded="false" data-cursor="open">
+          <span class="mono xrow-idx">C</span>
+          <span class="xrow-role">SWE FELLOW</span>
+          <span class="xrow-org serif">Google Fellowship / BASTA</span>
+          <span class="mono xrow-date">MAR — MAY 2026</span>
+          <span class="xrow-plus" aria-hidden="true">+</span>
+        </button>
+        <div class="xrow-body">
+          <div class="xrow-inner">
+            <ul>
+              <li>Competitively selected from a national applicant pool for a Google-backed software engineering fellowship; direct mentorship from a Google Cloud engineer.</li>
+              <li>Completed the weekly technical-interview curriculum — solved 18 of 20 system design, data structures, and algorithms problems across structured mock interviews.</li>
+            </ul>
+            <p class="mono xrow-tags">SYSTEM DESIGN · DSA · MOCK INTERVIEWS</p>
+          </div>
+        </div>
+      </article>
     </section>
 
     <!-- ============ PROJECTS ============ -->
-    <section class="section" id="projects">
-      <div class="section-head reveal">
-        <span class="section-index">03</span>
-        <h2>Projects</h2>
-        <span class="section-rule"></span>
-      </div>
-      <div class="project-grid">
-        <article class="card reveal" data-tilt>
-          <div class="card-glow" aria-hidden="true"></div>
-          <div class="card-top">
-            <span class="card-date">Jan 2026</span>
-            <span class="card-role">Full Stack</span>
-          </div>
-          <h3>Security Sentinel</h3>
-          <p class="card-tagline">AI-driven code auditor</p>
-          <p>
-            Orchestrated a <strong>multi-agent system</strong> for static analysis of large-scale Python
-            repositories using tool calling and structured LLM outputs — identifying logic
-            vulnerabilities and code smells with <strong>85%+ detection accuracy</strong>. Agentic RAG
-            injects project-specific context into prompts, cutting hallucinations and lifting
-            detection precision <strong>30% over zero-shot</strong>.
-          </p>
-          <div class="tag-row">
-            <span class="tag">TypeScript</span><span class="tag">Anthropic Claude API</span><span class="tag">Multi-Agent RAG</span><span class="tag">Docker</span>
-          </div>
-        </article>
-        <article class="card reveal" data-tilt>
-          <div class="card-glow" aria-hidden="true"></div>
-          <div class="card-top">
-            <span class="card-date">Oct 2025</span>
-            <span class="card-role">Backend</span>
-          </div>
-          <h3>Polly Debate AI</h3>
-          <p class="card-tagline">Real-time multimodal debate coach</p>
-          <p>
-            Integrated <strong>DeepFace and OpenCV</strong> for real-time emotion detection, processing
-            video at <strong>30+ FPS</strong>. Multimodal scoring combines facial-expression data with
-            audio tone via Google Speech-to-Text — improving user debate performance metrics by
-            <strong>56%</strong>.
-          </p>
-          <div class="tag-row">
-            <span class="tag">Python</span><span class="tag">DeepFace</span><span class="tag">OpenCV</span><span class="tag">Gemini API</span><span class="tag">WebSockets</span>
-          </div>
-        </article>
-        <article class="card reveal" data-tilt>
-          <div class="card-glow" aria-hidden="true"></div>
-          <div class="card-top">
-            <span class="card-date">Nov 2024</span>
-            <span class="card-role">Full Stack</span>
-          </div>
-          <h3>HeartScope</h3>
-          <p class="card-tagline">Heart-disease prediction app</p>
-          <p>
-            Full-stack health prediction system reaching <strong>88% accuracy</strong> with Random
-            Forest and <strong>sub-second</strong> risk assessments. An ML pipeline with modal
-            imputation and categorical encoding cuts prediction errors <strong>12%</strong> on
-            incomplete patient data.
-          </p>
-          <div class="tag-row">
-            <span class="tag">Java</span><span class="tag">Spring</span><span class="tag">Random Forest</span><span class="tag">JavaScript</span>
-          </div>
-        </article>
-      </div>
-    </section>
+    <section class="sec" id="projects">
+      <header class="sec-head r">
+        <span class="mono sec-index">03</span>
+        <h2 data-scramble-reveal>PROJECTS</h2>
+        <span class="mono sec-note">HOVER / CLICK</span>
+      </header>
 
-    <!-- ============ SKILLS ============ -->
-    <section class="section" id="skills">
-      <div class="section-head reveal">
-        <span class="section-index">04</span>
-        <h2>Skills</h2>
-        <span class="section-rule"></span>
-      </div>
-      <div class="skills-grid">
-        <div class="skill-group reveal">
-          <h3><span class="skill-glyph">◈</span> AI &amp; Agentic Systems</h3>
-          <div class="tag-row">
-            <span class="tag">Agentic Workflows</span><span class="tag">Agent Harness Integration</span><span class="tag">Lifecycle-Hook Context Injection</span><span class="tag">Context &amp; Memory Management</span><span class="tag">Tool / Function Calling</span><span class="tag">Model Context Protocol (MCP)</span><span class="tag">RAG</span><span class="tag">Evaluation Frameworks</span><span class="tag">Prompt Engineering</span><span class="tag">Anthropic Claude</span><span class="tag">Google Gemini</span><span class="tag">OpenAI Codex</span><span class="tag">Claude Agent SDK</span>
+      <article class="prow r"
+        data-peek-title="Security Sentinel"
+        data-peek-desc="Multi-agent static analysis of large-scale Python repos — tool calling + structured LLM outputs, 85%+ detection accuracy, agentic RAG lifting precision 30% over zero-shot."
+        data-peek-tags="TYPESCRIPT · CLAUDE API · MULTI-AGENT RAG · DOCKER">
+        <button class="prow-head" aria-expanded="false" data-cursor="view">
+          <span class="mono prow-idx">01</span>
+          <span class="prow-name" data-scramble>SECURITY SENTINEL</span>
+          <span class="mono prow-kind">AI CODE AUDITOR — JAN 2026</span>
+          <span class="prow-arrow" aria-hidden="true">↗</span>
+        </button>
+        <div class="prow-body">
+          <div class="prow-inner">
+            <p>
+              Orchestrated a <strong>multi-agent system</strong> for static analysis of large-scale Python
+              repositories using tool calling and structured LLM outputs — identifying logic vulnerabilities
+              and code smells with <strong>85%+ detection accuracy</strong>. Agentic RAG injects
+              project-specific context into prompts, reducing hallucinations and lifting detection precision
+              <strong>30% over zero-shot baseline</strong>.
+            </p>
+            <p class="mono prow-tags">TYPESCRIPT · ANTHROPIC CLAUDE API · MULTI-AGENT RAG · DOCKER</p>
           </div>
         </div>
-        <div class="skill-group reveal">
-          <h3><span class="skill-glyph">⌘</span> Languages &amp; Frameworks</h3>
-          <div class="tag-row">
-            <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">FastAPI</span><span class="tag">TypeScript</span><span class="tag">JavaScript</span><span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">React.js</span><span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">C++</span>
+      </article>
+
+      <article class="prow r"
+        data-peek-title="Polly Debate AI"
+        data-peek-desc="Real-time multimodal debate coach — DeepFace + OpenCV emotion detection at 30+ FPS, scoring fused with audio tone via Speech-to-Text. +56% user debate performance."
+        data-peek-tags="PYTHON · DEEPFACE · OPENCV · GEMINI · WEBSOCKETS">
+        <button class="prow-head" aria-expanded="false" data-cursor="view">
+          <span class="mono prow-idx">02</span>
+          <span class="prow-name" data-scramble>POLLY DEBATE AI</span>
+          <span class="mono prow-kind">MULTIMODAL COACH — OCT 2025</span>
+          <span class="prow-arrow" aria-hidden="true">↗</span>
+        </button>
+        <div class="prow-body">
+          <div class="prow-inner">
+            <p>
+              Integrated <strong>DeepFace and OpenCV</strong> for real-time emotion detection, processing
+              video frames at <strong>30+ FPS</strong>. Multimodal scoring combines facial-expression data
+              with audio tone analysis via Google Speech-to-Text — improving user debate performance metrics
+              by <strong>56%</strong>.
+            </p>
+            <p class="mono prow-tags">PYTHON · DEEPFACE · OPENCV · GOOGLE GEMINI API · WEBSOCKETS</p>
           </div>
         </div>
-        <div class="skill-group reveal">
-          <h3><span class="skill-glyph">☁</span> Cloud &amp; Infrastructure</h3>
-          <div class="tag-row">
-            <span class="tag">Microsoft Azure</span><span class="tag">AKS</span><span class="tag">Cosmos DB</span><span class="tag">Blob Storage</span><span class="tag">Event Hubs</span><span class="tag">Container Apps</span><span class="tag">Kubernetes</span><span class="tag">Helm</span><span class="tag">Docker</span><span class="tag">OpenTelemetry</span><span class="tag">Google Cloud Platform</span><span class="tag">Cloudflare Workers</span><span class="tag">PostgreSQL</span><span class="tag">Firebase</span><span class="tag">CI/CD Pipelines</span><span class="tag">Git / GitHub</span>
+      </article>
+
+      <article class="prow r"
+        data-peek-title="HeartScope"
+        data-peek-desc="Full-stack heart-disease risk prediction — 88% accuracy Random Forest, sub-second responses, imputation pipeline cutting errors 12% on incomplete patient data."
+        data-peek-tags="JAVA · SPRING · RANDOM FOREST · JS">
+        <button class="prow-head" aria-expanded="false" data-cursor="view">
+          <span class="mono prow-idx">03</span>
+          <span class="prow-name" data-scramble>HEARTSCOPE</span>
+          <span class="mono prow-kind">HEALTH ML — NOV 2024</span>
+          <span class="prow-arrow" aria-hidden="true">↗</span>
+        </button>
+        <div class="prow-body">
+          <div class="prow-inner">
+            <p>
+              Full-stack health prediction system achieving <strong>88% accuracy</strong> with Random Forest,
+              enabling real-time heart-disease risk assessment in <strong>sub-second</strong> response times.
+              Optimized ML pipeline with modal imputation and categorical encoding — reducing prediction
+              errors by <strong>12%</strong> on incomplete patient data.
+            </p>
+            <p class="mono prow-tags">JAVA · JAVA SPRING · RANDOM FOREST · JAVASCRIPT</p>
           </div>
         </div>
-      </div>
+      </article>
+
+      <!-- cursor-following peek card (desktop) -->
+      <aside class="peek" id="peek" aria-hidden="true">
+        <p class="mono peek-eyebrow">PROJECT FILE</p>
+        <h3 id="peekTitle"></h3>
+        <p id="peekDesc"></p>
+        <p class="mono peek-tags" id="peekTags"></p>
+      </aside>
     </section>
 
-    <!-- ============ LEADERSHIP ============ -->
-    <section class="section" id="leadership">
-      <div class="section-head reveal">
-        <span class="section-index">05</span>
-        <h2>Leadership</h2>
-        <span class="section-rule"></span>
-      </div>
-      <div class="lead-grid">
-        <article class="lead-item reveal">
-          <span class="lead-date">Mar 2026 — May 2026</span>
-          <h3>Google Software Engineering Fellowship <span class="tl-org">· BASTA</span></h3>
-          <p>
-            Competitively selected from a national applicant pool for a Google-backed software
-            engineering fellowship with direct mentorship from a Google Cloud engineer. Completed
-            the weekly technical-interview curriculum, solving <strong>18 of 20</strong> system
-            design, data structures, and algorithms problems across structured mock interviews.
-          </p>
-        </article>
-        <article class="lead-item reveal">
-          <span class="lead-date">Feb 2024 — Jan 2025</span>
-          <h3>Treasurer / Event Coordinator <span class="tl-org">· SIAM, Queens College</span></h3>
-          <p>
-            Allocated <strong>$7,500+</strong> in combined budgets for professional-development
-            initiatives and hackathon sponsorships serving <strong>200+ members</strong>. Organized
-            weekly Python workshops and math competitions, driving a <strong>70% increase</strong>
-            in active member participation over two semesters.
-          </p>
-        </article>
-      </div>
-    </section>
+    <!-- ============ STACK ============ -->
+    <section class="sec" id="stack">
+      <header class="sec-head r">
+        <span class="mono sec-index">04</span>
+        <h2 data-scramble-reveal>STACK</h2>
+        <span class="mono sec-note">TOOLS OF THE TRADE</span>
+      </header>
 
-    <!-- ============ CONTACT ============ -->
-    <section class="section contact" id="contact">
-      <div class="section-head reveal">
-        <span class="section-index">06</span>
-        <h2>Contact</h2>
-        <span class="section-rule"></span>
+      <div class="stack-group r">
+        <h3 class="mono">A — AI &amp; AGENTIC SYSTEMS</h3>
+        <div class="cells">
+          <span class="cell">AGENTIC WORKFLOWS</span><span class="cell">AGENT HARNESS INTEGRATION</span><span class="cell">LIFECYCLE-HOOK CONTEXT INJECTION</span><span class="cell">CONTEXT &amp; MEMORY MGMT</span><span class="cell">TOOL / FUNCTION CALLING</span><span class="cell">MCP</span><span class="cell">RAG</span><span class="cell">EVALS</span><span class="cell">PROMPT ENGINEERING</span><span class="cell">ANTHROPIC CLAUDE</span><span class="cell">GOOGLE GEMINI</span><span class="cell">OPENAI CODEX</span><span class="cell">CLAUDE AGENT SDK</span>
+        </div>
       </div>
-      <div class="contact-inner reveal">
-        <p class="contact-kicker">Have an agent that needs a memory?</p>
-        <h3 class="contact-title">Let's build something that remembers.</h3>
-        <p class="contact-copy">
-          I'm open to conversations about agentic infrastructure, forward-deployed engineering,
-          and hard systems problems. The fastest way to reach me is email.
+      <div class="stack-group r">
+        <h3 class="mono">B — LANGUAGES &amp; FRAMEWORKS</h3>
+        <div class="cells">
+          <span class="cell">PYTHON</span><span class="cell">PANDAS</span><span class="cell">NUMPY</span><span class="cell">FASTAPI</span><span class="cell">TYPESCRIPT</span><span class="cell">JAVASCRIPT</span><span class="cell">NODE.JS</span><span class="cell">EXPRESS</span><span class="cell">REACT</span><span class="cell">JAVA</span><span class="cell">SPRING BOOT</span><span class="cell">C++</span>
+        </div>
+      </div>
+      <div class="stack-group r">
+        <h3 class="mono">C — CLOUD &amp; INFRASTRUCTURE</h3>
+        <div class="cells">
+          <span class="cell">MICROSOFT AZURE</span><span class="cell">AKS</span><span class="cell">COSMOS DB</span><span class="cell">BLOB STORAGE</span><span class="cell">EVENT HUBS</span><span class="cell">CONTAINER APPS</span><span class="cell">KUBERNETES</span><span class="cell">HELM</span><span class="cell">DOCKER</span><span class="cell">OPENTELEMETRY</span><span class="cell">GCP</span><span class="cell">CLOUDFLARE WORKERS</span><span class="cell">POSTGRESQL</span><span class="cell">FIREBASE</span><span class="cell">CI/CD</span><span class="cell">GIT / GITHUB</span>
+        </div>
+      </div>
+
+      <div class="lead-note r">
+        <p class="serif">
+          Also: Treasurer &amp; Event Coordinator of SIAM at Queens College — allocated $7,500+ across
+          professional-development budgets and hackathon sponsorships for 200+ members, and drove a 70%
+          rise in active participation through weekly Python workshops.
         </p>
-        <a class="btn btn-solid btn-lg" href="mailto:bryan.mejia3923@gmail.com">bryan.mejia3923@gmail.com</a>
-        <div class="contact-links">
-          <a href="https://github.com/bryan3342" target="_blank" rel="noopener">GitHub ↗</a>
-          <a href="https://linkedin.com/in/bryanmejia15" target="_blank" rel="noopener">LinkedIn ↗</a>
-          <a href="assets/BRYAN_MEJIA_RESUME.pdf" target="_blank" rel="noopener">Résumé ↗</a>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT (inverted) ============ -->
+    <section class="sec invert" id="contact">
+      <header class="sec-head r">
+        <span class="mono sec-index">05</span>
+        <h2 data-scramble-reveal>CONTACT</h2>
+        <span class="mono sec-note">NO FORMS. JUST EMAIL.</span>
+      </header>
+      <p class="contact-kicker serif r">Have an agent that needs a memory?</p>
+      <a class="contact-mega r" href="mailto:bryan.mejia3923@gmail.com" data-scramble data-cursor="mail">LET'S&nbsp;TALK</a>
+      <div class="contact-row r">
+        <a class="contact-btn" href="mailto:bryan.mejia3923@gmail.com" data-magnet data-cursor>bryan.mejia3923@gmail.com</a>
+        <div class="contact-links mono">
+          <a href="https://github.com/bryan3342" target="_blank" rel="noopener" data-scramble data-cursor>GITHUB&nbsp;↗</a>
+          <a href="https://linkedin.com/in/bryanmejia15" target="_blank" rel="noopener" data-scramble data-cursor>LINKEDIN&nbsp;↗</a>
+          <a href="assets/BRYAN_MEJIA_RESUME.pdf" target="_blank" rel="noopener" data-scramble data-cursor>RÉSUMÉ&nbsp;↗</a>
         </div>
       </div>
+      <footer class="foot mono">
+        <span>© <span id="year"></span> BRYAN MEJIA</span>
+        <span>DESIGNED &amp; BUILT BY HAND — NO TEMPLATES</span>
+        <span id="clock2">--:--:-- NYC</span>
+      </footer>
     </section>
   </main>
-
-  <footer class="footer">
-    <span>© <span id="year"></span> Bryan Mejia · Designed &amp; built by hand</span>
-    <span class="footer-mono">NYC · 40.7128° N, 74.0060° W</span>
-  </footer>
 
   <script src="main.js"></script>
 </body>
