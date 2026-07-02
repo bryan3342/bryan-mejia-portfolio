@@ -7,7 +7,11 @@ ink, and one loud ultramarine; typography is the interface. All dynamic behavior
 runs client-side: per-letter variable-font distortion that follows the cursor,
 scroll-squeezed display type, text scramble, a scroll-velocity-reactive marquee,
 cursor-following project peek cards, magnetic buttons, a difference-blend custom
-cursor, accordion rows, count-up stats, and a live NYC clock.
+cursor, accordion rows, count-up stats, and a live NYC clock. A print-technical
+visual layer draws each system as a self-drawing blueprint figure (inline SVG,
+marching-ants flow lines), plus paper grain, a right-edge ruler with live scroll
+position, a spinning circular-text stamp, parallax watermark numerals, hero
+registration marks, and a barcode colophon.
 
 ## Structure
 

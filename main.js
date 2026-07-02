@@ -244,6 +244,57 @@
     reveals.forEach((el) => io.observe(el));
   }
 
+  /* ---------- ruler marker + watermark parallax ---------- */
+  const rulerMark = document.getElementById("rulerMark");
+  const rulerPct = document.getElementById("rulerPct");
+  const wms = [...document.querySelectorAll(".wm")];
+  if (rulerMark || wms.length) {
+    let ticking = false;
+    const paint = () => {
+      ticking = false;
+      const doc = document.documentElement;
+      const max = doc.scrollHeight - doc.clientHeight;
+      const p = max > 0 ? window.scrollY / max : 0;
+      if (rulerMark) {
+        const y = p * (window.innerHeight - 3);
+        rulerMark.style.top = `${y}px`;
+        rulerPct.style.top = `${Math.min(y + 6, window.innerHeight - 46)}px`;
+        rulerPct.textContent = `${String(Math.round(p * 100)).padStart(2, "0")}%`;
+      }
+      if (!rm) {
+        const mid = window.innerHeight / 2;
+        for (const wm of wms) {
+          const r = wm.parentElement.getBoundingClientRect();
+          wm.style.transform = `translateY(${(r.top + r.height / 2 - mid) * -0.09}px)`;
+        }
+      }
+    };
+    window.addEventListener("scroll", () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(paint); }
+    }, { passive: true });
+    paint();
+  }
+
+  /* ---------- blueprint figures: self-draw on reveal / expand ---------- */
+  const figIO = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) { e.target.classList.add("drawn"); figIO.unobserve(e.target); }
+    }
+  }, { threshold: 0.3 });
+  document.querySelectorAll(".fig").forEach((fig) => {
+    // figs inside collapsed accordion bodies have zero height; drawn on expand instead
+    if (fig.closest(".prow-body")) return;
+    figIO.observe(fig);
+  });
+  document.querySelectorAll(".prow-head").forEach((head) => {
+    head.addEventListener("click", () => {
+      if (head.getAttribute("aria-expanded") === "true") {
+        const fig = head.parentElement.querySelector(".fig");
+        if (fig) setTimeout(() => fig.classList.add("drawn"), 180);
+      }
+    });
+  });
+
   /* ---------- footer year ---------- */
   document.getElementById("year").textContent = new Date().getFullYear();
 })();

@@ -21,6 +21,12 @@
   <!-- exposed column grid -->
   <div class="gridlines" aria-hidden="true"><i></i><i></i><i></i></div>
 
+  <!-- right-edge ruler with live scroll position -->
+  <div class="ruler" aria-hidden="true">
+    <i id="rulerMark"></i>
+    <span class="mono" id="rulerPct">00%</span>
+  </div>
+
   <!-- ============ TOP BAR ============ -->
   <header class="bar">
     <a class="bar-brand" href="#top" data-cursor>BRYAN&nbsp;MEJIA<sup>®</sup></a>
@@ -38,6 +44,17 @@
   <main id="top">
     <!-- ============ HERO ============ -->
     <section class="hero" id="hero">
+      <span class="reg reg-tl" aria-hidden="true">+</span>
+      <span class="reg reg-tr" aria-hidden="true">+</span>
+      <span class="reg reg-bl" aria-hidden="true">+</span>
+      <span class="reg reg-br" aria-hidden="true">+</span>
+      <svg class="stamp" viewBox="0 0 120 120" aria-hidden="true">
+        <defs>
+          <path id="stampCirc" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0" />
+        </defs>
+        <text class="stamp-text"><textPath href="#stampCirc">FORWARD DEPLOYED ENGINEER ✦ NYC ✦ EST 2026 ✦</textPath></text>
+        <text class="stamp-core" x="60" y="68" text-anchor="middle">✦</text>
+      </svg>
       <div class="hero-meta mono r">
         <span>FORWARD DEPLOYED ENGINEER</span>
         <span>PORTFOLIO — 2026 EDITION</span>
@@ -67,6 +84,7 @@
 
     <!-- ============ ABOUT ============ -->
     <section class="sec" id="about">
+      <span class="wm" aria-hidden="true">01</span>
       <header class="sec-head r">
         <span class="mono sec-index">01</span>
         <h2 data-scramble-reveal>ABOUT</h2>
@@ -104,10 +122,33 @@
           <span class="mono stat-l">DETECTION ACCURACY, MULTI-AGENT AUDITOR</span>
         </div>
       </div>
+
+      <figure class="fig fig-loop r">
+        <svg viewBox="0 0 820 150" aria-hidden="true">
+          <path class="dline" pathLength="1" d="M10,30 h120 v44 h-120 Z" />
+          <path class="dline" pathLength="1" d="M175,30 h120 v44 h-120 Z" />
+          <path class="dline" pathLength="1" d="M340,30 h110 v44 h-110 Z" />
+          <path class="dline" pathLength="1" d="M495,30 h120 v44 h-120 Z" />
+          <path class="dline" pathLength="1" d="M660,30 h150 v44 h-150 Z" />
+          <path class="flow" d="M130,52 H175" />
+          <path class="flow" d="M295,52 H340" />
+          <path class="flow" d="M450,52 H495" />
+          <path class="flow" d="M615,52 H660" />
+          <path class="flow" d="M735,74 V118 H70 V74" />
+          <text x="70" y="56">AGENT HARNESS</text>
+          <text x="235" y="56">OTEL COLLECTOR</text>
+          <text x="395" y="56">EVENT HUBS</text>
+          <text x="555" y="56">MEMORY ENGINE</text>
+          <text x="735" y="56">CTX INJECTION</text>
+          <text class="t-accent" x="402" y="112">SHARED CONTEXT — REUSED ACROSS USERS / AGENTS / SESSIONS</text>
+        </svg>
+        <figcaption class="mono">FIG. 01 — THE MEMORY LOOP, AS SHIPPED AT AUGENTA</figcaption>
+      </figure>
     </section>
 
     <!-- ============ EXPERIENCE ============ -->
     <section class="sec" id="work">
+      <span class="wm" aria-hidden="true">02</span>
       <header class="sec-head r">
         <span class="mono sec-index">02</span>
         <h2 data-scramble-reveal>WORK</h2>
@@ -175,6 +216,7 @@
 
     <!-- ============ PROJECTS ============ -->
     <section class="sec" id="projects">
+      <span class="wm" aria-hidden="true">03</span>
       <header class="sec-head r">
         <span class="mono sec-index">03</span>
         <h2 data-scramble-reveal>PROJECTS</h2>
@@ -193,14 +235,40 @@
         </button>
         <div class="prow-body">
           <div class="prow-inner">
-            <p>
-              Orchestrated a <strong>multi-agent system</strong> for static analysis of large-scale Python
-              repositories using tool calling and structured LLM outputs — identifying logic vulnerabilities
-              and code smells with <strong>85%+ detection accuracy</strong>. Agentic RAG injects
-              project-specific context into prompts, reducing hallucinations and lifting detection precision
-              <strong>30% over zero-shot baseline</strong>.
-            </p>
-            <p class="mono prow-tags">TYPESCRIPT · ANTHROPIC CLAUDE API · MULTI-AGENT RAG · DOCKER</p>
+            <div class="prow-grid">
+              <div class="prow-text">
+                <p>
+                  Orchestrated a <strong>multi-agent system</strong> for static analysis of large-scale Python
+                  repositories using tool calling and structured LLM outputs — identifying logic vulnerabilities
+                  and code smells with <strong>85%+ detection accuracy</strong>. Agentic RAG injects
+                  project-specific context into prompts, reducing hallucinations and lifting detection precision
+                  <strong>30% over zero-shot baseline</strong>.
+                </p>
+                <p class="mono prow-tags">TYPESCRIPT · ANTHROPIC CLAUDE API · MULTI-AGENT RAG · DOCKER</p>
+              </div>
+              <figure class="fig fig-card">
+                <svg viewBox="0 0 360 200" aria-hidden="true">
+                  <path class="dline" pathLength="1" d="M120,12 h120 v32 h-120 Z" />
+                  <path class="dline" pathLength="1" d="M20,86 h95 v32 h-95 Z" />
+                  <path class="dline" pathLength="1" d="M132,86 h95 v32 h-95 Z" />
+                  <path class="dline" pathLength="1" d="M244,86 h95 v32 h-95 Z" />
+                  <path class="dline" pathLength="1" d="M120,152 h120 v32 h-120 Z" />
+                  <path class="flow" d="M180,44 L67,86" />
+                  <path class="flow" d="M180,44 V86" />
+                  <path class="flow" d="M180,44 L291,86" />
+                  <path class="flow" d="M67,118 L180,152" />
+                  <path class="flow" d="M180,118 V152" />
+                  <path class="flow" d="M291,118 L180,152" />
+                  <text x="180" y="32">ORCHESTRATOR</text>
+                  <text x="67" y="106">AGENT 01</text>
+                  <text x="179" y="106">AGENT 02</text>
+                  <text x="291" y="106">AGENT 03</text>
+                  <text x="180" y="172">AUDIT REPORT</text>
+                  <text class="t-accent" x="303" y="172">85%+</text>
+                </svg>
+                <figcaption class="mono">FIG. 02 — FAN-OUT / FAN-IN</figcaption>
+              </figure>
+            </div>
           </div>
         </div>
       </article>
@@ -217,13 +285,38 @@
         </button>
         <div class="prow-body">
           <div class="prow-inner">
-            <p>
-              Integrated <strong>DeepFace and OpenCV</strong> for real-time emotion detection, processing
-              video frames at <strong>30+ FPS</strong>. Multimodal scoring combines facial-expression data
-              with audio tone analysis via Google Speech-to-Text — improving user debate performance metrics
-              by <strong>56%</strong>.
-            </p>
-            <p class="mono prow-tags">PYTHON · DEEPFACE · OPENCV · GOOGLE GEMINI API · WEBSOCKETS</p>
+            <div class="prow-grid">
+              <div class="prow-text">
+                <p>
+                  Integrated <strong>DeepFace and OpenCV</strong> for real-time emotion detection, processing
+                  video frames at <strong>30+ FPS</strong>. Multimodal scoring combines facial-expression data
+                  with audio tone analysis via Google Speech-to-Text — improving user debate performance metrics
+                  by <strong>56%</strong>.
+                </p>
+                <p class="mono prow-tags">PYTHON · DEEPFACE · OPENCV · GOOGLE GEMINI API · WEBSOCKETS</p>
+              </div>
+              <figure class="fig fig-card">
+                <svg viewBox="0 0 360 200" aria-hidden="true">
+                  <path class="dline" pathLength="1" d="M15,25 h90 v30 h-90 Z" />
+                  <path class="dline" pathLength="1" d="M15,135 h90 v30 h-90 Z" />
+                  <path class="dline" pathLength="1" d="M135,25 h105 v30 h-105 Z" />
+                  <path class="dline" pathLength="1" d="M135,135 h105 v30 h-105 Z" />
+                  <path class="dline" pathLength="1" d="M260,80 h85 v30 h-85 Z" />
+                  <path class="flow" d="M105,40 H135" />
+                  <path class="flow" d="M105,150 H135" />
+                  <path class="flow" d="M240,40 L260,88" />
+                  <path class="flow" d="M240,150 L260,102" />
+                  <text x="60" y="44">CAMERA</text>
+                  <text x="60" y="154">MIC</text>
+                  <text x="187" y="44">DEEPFACE+CV</text>
+                  <text x="187" y="154">SPEECH-TO-TEXT</text>
+                  <text x="302" y="99">FUSION</text>
+                  <text class="t-accent" x="302" y="66">30+ FPS</text>
+                  <text class="t-accent" x="302" y="130">+56% PERF</text>
+                </svg>
+                <figcaption class="mono">FIG. 03 — MULTIMODAL FUSION</figcaption>
+              </figure>
+            </div>
           </div>
         </div>
       </article>
@@ -240,13 +333,36 @@
         </button>
         <div class="prow-body">
           <div class="prow-inner">
-            <p>
-              Full-stack health prediction system achieving <strong>88% accuracy</strong> with Random Forest,
-              enabling real-time heart-disease risk assessment in <strong>sub-second</strong> response times.
-              Optimized ML pipeline with modal imputation and categorical encoding — reducing prediction
-              errors by <strong>12%</strong> on incomplete patient data.
-            </p>
-            <p class="mono prow-tags">JAVA · JAVA SPRING · RANDOM FOREST · JAVASCRIPT</p>
+            <div class="prow-grid">
+              <div class="prow-text">
+                <p>
+                  Full-stack health prediction system achieving <strong>88% accuracy</strong> with Random Forest,
+                  enabling real-time heart-disease risk assessment in <strong>sub-second</strong> response times.
+                  Optimized ML pipeline with modal imputation and categorical encoding — reducing prediction
+                  errors by <strong>12%</strong> on incomplete patient data.
+                </p>
+                <p class="mono prow-tags">JAVA · JAVA SPRING · RANDOM FOREST · JAVASCRIPT</p>
+              </div>
+              <figure class="fig fig-card">
+                <svg viewBox="0 0 360 200" aria-hidden="true">
+                  <path class="dline" pathLength="1" d="M15,30 h100 v32 h-100 Z" />
+                  <path class="dline" pathLength="1" d="M150,30 h100 v32 h-100 Z" />
+                  <path class="dline" pathLength="1" d="M262,72 L277,40 L292,72 Z" />
+                  <path class="dline" pathLength="1" d="M285,66 L300,34 L315,66 Z" />
+                  <path class="dline" pathLength="1" d="M310,70 L325,38 L340,70 Z" />
+                  <path class="dline" pathLength="1" d="M200,140 h120 v32 h-120 Z" />
+                  <path class="flow" d="M115,46 H150" />
+                  <path class="flow" d="M250,46 L266,52" />
+                  <path class="flow" d="M300,76 L262,140" />
+                  <text x="65" y="50">PATIENT DATA</text>
+                  <text x="200" y="50">IMPUTATION</text>
+                  <text x="300" y="92">RANDOM FOREST</text>
+                  <text x="260" y="160">RISK SCORE</text>
+                  <text class="t-accent" x="260" y="186">88% ACC — SUB-SECOND</text>
+                </svg>
+                <figcaption class="mono">FIG. 04 — ENSEMBLE PIPELINE</figcaption>
+              </figure>
+            </div>
           </div>
         </div>
       </article>
@@ -262,6 +378,7 @@
 
     <!-- ============ STACK ============ -->
     <section class="sec" id="stack">
+      <span class="wm" aria-hidden="true">04</span>
       <header class="sec-head r">
         <span class="mono sec-index">04</span>
         <h2 data-scramble-reveal>STACK</h2>
@@ -298,6 +415,7 @@
 
     <!-- ============ CONTACT (inverted) ============ -->
     <section class="sec invert" id="contact">
+      <span class="wm" aria-hidden="true">05</span>
       <header class="sec-head r">
         <span class="mono sec-index">05</span>
         <h2 data-scramble-reveal>CONTACT</h2>
@@ -312,6 +430,10 @@
           <a href="https://linkedin.com/in/bryanmejia15" target="_blank" rel="noopener" data-scramble data-cursor>LINKEDIN&nbsp;↗</a>
           <a href="assets/BRYAN_MEJIA_RESUME.pdf" target="_blank" rel="noopener" data-scramble data-cursor>RÉSUMÉ&nbsp;↗</a>
         </div>
+      </div>
+      <div class="barcode-wrap" aria-hidden="true">
+        <div class="barcode"></div>
+        <span class="mono barcode-label">BM·26·NYC·FDE</span>
       </div>
       <footer class="foot mono">
         <span>© <span id="year"></span> BRYAN MEJIA</span>

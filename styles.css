@@ -313,11 +313,13 @@ body.has-cursor .cursor { display: flex; }
 }
 .prow-head[aria-expanded="true"] + .prow-body { grid-template-rows: 1fr; }
 .prow-inner { overflow: hidden; }
-.prow-inner > p:first-child {
-  padding: 0.4rem 0 1rem calc(3.5rem + 1.25rem);
-  max-width: 60rem; font-size: 1rem;
+.prow-grid {
+  display: grid; grid-template-columns: 1fr minmax(260px, 360px);
+  gap: 2.5rem; align-items: start;
+  padding: 0.4rem 0 1.8rem calc(3.5rem + 1.25rem);
 }
-.prow-tags { padding: 0 0 1.8rem calc(3.5rem + 1.25rem); color: var(--accent); }
+.prow-text p:first-child { max-width: 60rem; font-size: 1rem; margin-bottom: 1rem; }
+.prow-tags { color: var(--accent); }
 
 /* cursor-following peek card */
 .peek {
@@ -421,8 +423,10 @@ body.has-cursor .cursor { display: flex; }
   .xrow-inner ul, .xrow-tags { padding-left: 0; }
   .prow-head { grid-template-columns: 2.6rem 1fr 2rem; }
   .prow-kind { display: none; }
-  .prow-inner > p:first-child, .prow-tags { padding-left: 0; }
+  .prow-grid { padding-left: 0; grid-template-columns: 1fr; gap: 1.5rem; }
   .peek { display: none; }
+  .ruler, .stamp, .reg { display: none; }
+  .wm { font-size: 38vw; }
 }
 
 @media (max-width: 760px) {
@@ -441,10 +445,130 @@ body.has-cursor .cursor { display: flex; }
   .contact-row { flex-direction: column; align-items: flex-start; }
 }
 
+/* ============================================================
+   VISUAL LAYER — print grain, ruler, stamps, blueprint figures
+   ============================================================ */
+
+/* paper grain (SVG turbulence, tiled) */
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: 98;
+  pointer-events: none; opacity: 0.05; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* right-edge ruler with live scroll marker */
+.ruler {
+  position: fixed; top: 0; right: 0; bottom: 0; width: 22px; z-index: 40;
+  border-left: 1px solid var(--rule-soft);
+  background: repeating-linear-gradient(180deg,
+    var(--rule-soft) 0 1px, transparent 1px 20px);
+  pointer-events: none;
+}
+.ruler i {
+  position: absolute; right: 0; left: 0; height: 3px;
+  background: var(--accent);
+}
+.ruler span {
+  position: absolute; right: 3px; font-size: 0.55rem;
+  color: var(--accent); writing-mode: vertical-rl;
+  transform: translateY(8px);
+}
+
+/* hero registration marks */
+.reg {
+  position: absolute; z-index: 2;
+  font-family: var(--mono); font-size: 1rem; color: var(--accent);
+  opacity: 0.85; line-height: 1;
+}
+.reg-tl { top: calc(52px + 1.1rem); left: 0.9rem; }
+.reg-tr { top: calc(52px + 1.1rem); right: calc(0.9rem + 22px); }
+.reg-bl { bottom: 1.1rem; left: 0.9rem; }
+.reg-br { bottom: 1.1rem; right: calc(0.9rem + 22px); }
+
+/* spinning circular-text stamp */
+.stamp {
+  position: absolute; z-index: 2;
+  top: calc(52px + 4.5rem); right: calc(var(--pad) + 1rem);
+  width: 128px; height: 128px;
+  animation: spin 22s linear infinite;
+}
+.stamp-text {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+  fill: var(--ink);
+}
+.stamp-core { font-size: 22px; fill: var(--accent); }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* giant outlined watermark numerals (parallax via JS) */
+.wm {
+  position: absolute; z-index: -1; top: 0.5rem; right: -1.5rem;
+  font-size: clamp(9rem, 20vw, 20rem); font-weight: 800; line-height: 1;
+  font-variation-settings: "wdth" 125;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--rule-soft);
+  pointer-events: none; user-select: none;
+  will-change: transform;
+}
+.invert .wm { -webkit-text-stroke: 1.5px rgba(242, 239, 230, 0.16); }
+
+/* blueprint figures */
+.fig {
+  border: 1px solid var(--rule);
+  padding: 1rem 1.1rem 0.9rem;
+  background: rgba(242, 239, 230, 0.6);
+}
+.fig svg { display: block; width: 100%; height: auto; color: var(--ink); }
+.fig text {
+  font-family: var(--mono); font-size: 10px; fill: currentColor;
+  text-anchor: middle; letter-spacing: 0.04em;
+  opacity: 0; transition: opacity 0.5s 0.7s;
+}
+.fig .t-accent { fill: var(--accent); font-weight: 700; }
+.fig.drawn text { opacity: 1; }
+.fig .dline {
+  fill: none; stroke: currentColor; stroke-width: 1.2;
+  stroke-dasharray: 1; stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.1s var(--ease);
+}
+.fig.drawn .dline { stroke-dashoffset: 0; }
+.fig .flow {
+  fill: none; stroke: var(--accent); stroke-width: 1.2;
+  stroke-dasharray: 6 5;
+  animation: ants 1.1s linear infinite;
+  opacity: 0; transition: opacity 0.4s 0.9s;
+}
+.fig.drawn .flow { opacity: 1; }
+@keyframes ants { to { stroke-dashoffset: -11; } }
+.fig figcaption {
+  margin-top: 0.8rem; padding-top: 0.6rem;
+  border-top: 1px solid var(--rule-soft);
+  color: var(--accent); font-size: 0.62rem; letter-spacing: 0.1em;
+}
+.fig-loop { margin-top: 2.5rem; max-width: 56rem; }
+.fig-card svg text { font-size: 9.5px; }
+
+/* barcode */
+.barcode-wrap {
+  display: flex; flex-direction: column; align-items: flex-end;
+  gap: 0.35rem; margin-top: 3rem;
+}
+.barcode {
+  width: 190px; height: 42px; color: var(--paper);
+  background:
+    repeating-linear-gradient(90deg, currentColor 0 2px, transparent 2px 5px),
+    repeating-linear-gradient(90deg, currentColor 0 4px, transparent 4px 11px);
+}
+.barcode-label { font-size: 0.6rem; letter-spacing: 0.35em; opacity: 0.7; }
+
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .r { opacity: 1; transform: none; transition: none; }
   .status-dot, .hero-scroll { animation: none; }
   .xrow-body, .prow-body, .xrow-plus, .prow-arrow, .contact-mega { transition: none; }
+  .stamp { animation: none; }
+  .fig .dline { stroke-dashoffset: 0; transition: none; }
+  .fig .flow { animation: none; opacity: 1; transition: none; }
+  .fig text { opacity: 1; transition: none; }
+  .wm { transform: none !important; }
 }
