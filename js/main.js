@@ -36,33 +36,52 @@
     // fall back down the quality chain before giving up on the video
     if (video.currentSrc && video.currentSrc.includes("4k")) {
       video.src = "assets/nyc-sunset-hd.mp4";
-      if (!reducedMotion) { const p = video.play(); if (p) p.catch(() => {}); }
+      tryPlay();
     } else {
       hero.classList.add("no-video");
     }
   });
 
-  if (reducedMotion) {
-    video.autoplay = false;
-    video.pause();
-    videoToggle.textContent = "▶";
-    videoToggle.setAttribute("aria-label", "Play background video");
-  } else {
-    video.muted = true;
+  // Label follows real playback state, so the button can never contradict the
+  // video: a rejected play() used to leave it reading "pause" while paused,
+  // which made the first click a no-op.
+  const syncToggle = () => {
+    const playing = !video.paused;
+    videoToggle.textContent = playing ? "⏸" : "▶";
+    videoToggle.setAttribute("aria-label", playing ? "Pause background video" : "Play background video");
+  };
+  video.addEventListener("play", syncToggle);
+  video.addEventListener("pause", syncToggle);
+
+  // Browsers exempt muted inline video from the autoplay block, but still
+  // refuse while the tab is hidden or the device is in low-power mode. Those
+  // conditions lift later, so retry on the events that lift them instead of
+  // treating the first rejection as final.
+  let userPaused = false;
+  function tryPlay() {
+    if (userPaused) return;
     const p = video.play();
     if (p) p.catch(() => {});
   }
-  videoToggle.addEventListener("click", () => {
-    if (video.paused) {
-      video.play();
-      videoToggle.textContent = "⏸";
-      videoToggle.setAttribute("aria-label", "Pause background video");
-    } else {
-      video.pause();
-      videoToggle.textContent = "▶";
-      videoToggle.setAttribute("aria-label", "Play background video");
-    }
+
+  video.muted = true;       // both re-asserted because swapping .src above
+  video.playsInline = true; // reloads the element
+  tryPlay();
+  video.addEventListener("canplay", tryPlay);
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) tryPlay();
   });
+  // Last resort: any gesture satisfies even the strictest autoplay policy.
+  ["pointerdown", "keydown", "touchstart", "scroll"].forEach((evt) =>
+    window.addEventListener(evt, tryPlay, { once: true, passive: true })
+  );
+
+  videoToggle.addEventListener("click", () => {
+    userPaused = !video.paused;
+    if (video.paused) tryPlay();
+    else video.pause();
+  });
+  syncToggle();
 
   /* ---------- light scroll handler: nav, scrollspy, coverflows ---------- */
   const cfUpdaters = []; // scroll-driven coverflow updaters register here
