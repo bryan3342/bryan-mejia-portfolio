@@ -1,0 +1,31 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+
+      # Stage dist/ exactly like the local deploy: site files plus web-sized
+      # media only (media/images full-res originals are not in the repo).
+      - name: Stage dist
+        run: |
+          mkdir -p dist/media
+          cp index.html dist/
+          cp -r css js assets dist/
+          cp -r media/web media/videos dist/media/
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 5e9a9e3a70b5e439fd6a50b80b39d419
+          command: pages deploy dist --project-name bryanmejiaportfolio

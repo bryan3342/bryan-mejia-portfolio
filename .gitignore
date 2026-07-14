@@ -1,2 +1,12 @@
-.DS_Store
+# Full-resolution personal photos - never publish (site uses media/web copies)
+media/images/
+
+# Generated deploy staging folder (rebuilt by CI / deploy script)
+dist/
+
+# Local wrangler cache
+.wrangler/
+
 node_modules/
+.DS_Store
+Thumbs.db

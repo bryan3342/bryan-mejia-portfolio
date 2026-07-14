@@ -1,52 +1,67 @@
-# Bryan Mejia — Portfolio
+# Bryan Mejia — Portfolio Website
 
-Personal portfolio for Bryan Mejia, Forward Deployed Engineer in New York.
-A zero-build static site: plain HTML, CSS, and vanilla JavaScript — no framework,
-no bundler, no server. Design direction: **Kinetic Brutalist Editorial** — paper,
-ink, and one loud ultramarine; typography is the interface. All dynamic behavior
-runs client-side: per-letter variable-font distortion that follows the cursor,
-scroll-squeezed display type, text scramble, a scroll-velocity-reactive marquee,
-cursor-following project peek cards, magnetic buttons, a difference-blend custom
-cursor, accordion rows, count-up stats, and a live NYC clock. A print-technical
-visual layer draws each system as a self-drawing blueprint figure (inline SVG,
-marching-ants flow lines), plus paper grain, a right-edge ruler with live scroll
-position, a spinning circular-text stamp, parallax watermark numerals, hero
-registration marks, and a barcode colophon.
+An interactive single-page portfolio built with vanilla HTML, CSS, and JavaScript — no build step, no dependencies.
+
+**Design language: "Sunset over New York."** The landing hero is a real Ultra HD 4K aerial video of Manhattan at sunset — deliberately the only rich layer on the page. Everything below it switches to a flat, light cream scheme with zero heavy effects, so nothing outside the hero can lag. A soft pastel NYC skyline silhouette closes the page.
+
+Built for performance: no fixed compositing layers, no backdrop blurs, no per-frame JS painting, no gradient repaints. The only continuous work is the hero video itself (pausable) and the pipeline packets (which stop when the diagram is off-screen).
+
+## Interactive features
+
+- **Ultra HD 4K NYC sunset video hero** (`assets/nyc-sunset-4k.mp4`, 3840×2160) with autoplay/loop and a pause control; JS swaps to the 1080p file on small screens or data-saver connections, falls back down the quality chain on load errors, shows a sunset gradient if video fails entirely, and stays paused under reduced motion
+- **Light editorial body** — flat rose-cream, Playfair Display + Manrope, soft cards; visually separated from the cinematic hero; sections organized by title alone (no numbering)
+- **Color palette** — Night Bordeaux `#4F000B` (ink), Dark Amaranth `#720026`, Amaranth `#CE4257` (primary accent), Coral Glow `#FF7F51`, Sandy Brown `#FF9B54` (all light surfaces; no white anywhere), over warm rose-cream backgrounds
+- **3D skill constellation** — a slowly rotating sphere of all 38 skills (Fibonacci-distributed, color-coded into AI & Agentic Systems / Languages & Frameworks / Cloud & Infrastructure) spanning the full viewport width, with the editorial rail and group legend hugging the left edge; hovering a skill slows the rotation, highlights it, and shows its description in the rail; hovering a legend group dims the others. The rotation loop pauses off-screen and under reduced motion
+- **Interactive places map** (About) — a palette-themed world map (`assets/world-map.svg`, built from Natural Earth data) with pulsing points; hovering or focusing a point flips a large card into view over the map with a photo/video carousel (media in `media/web/` and `media/videos/`, full images letterboxed on a night-ink backdrop), location title, event subtitle, and a short story; a Back button (or Esc, or clicking the bare map) flips it back out. Zoom in/out buttons (up to 4x) with drag-to-pan while zoomed; pins keep their size at any zoom level. Points are defined in `MAP_POINTS` in `js/main.js` as percent coordinates; the projection is equirectangular (latitude 85 to -60), so for a place at (lat, lon): `x = (lon + 180) / 360 * 100`, `y = (85 - lat) / 145 * 100`
+- **Quick menu** — `Ctrl/⌘+K`: jump to sections, glide down the page (gentle auto-scroll), open links, copy email… try "Hire Bryan"
+- **Letter-by-letter hero entrance** for the name
+- **Scroll-driven 3D coverflow bands** — "Experience" and "Projects" are sticky full-screen stages: as you scroll, the deck flips through its cards in 3D (front card face-on, the rest receding to the viewport edge), then the page releases into the next section. Giant ghost watermarks and editorial side rails (eyebrow, serif title, italic `01 / 05` counter) frame each stage; arrow buttons and keys scroll you to the matching card. Ghost watermark style is reused behind the About section
+- **Contact section** — centered editorial closer ("Let's build something together.") with a mailto CTA, a one-click copy-email button, and LinkedIn / GitHub / email cards; the footer fades to a muted night-bordeaux with outlined name mark and social links
+- **NYC clock chip** — live New York time, icon follows the actual hour there (☀️ → 🌇 → 🌙)
+- Scrollspy nav that goes from glass-over-video to solid cream, one-click email copy
+- Respects `prefers-reduced-motion`
+
+## Running locally
+
+Open `index.html` directly in a browser, or serve it:
+
+```powershell
+python -m http.server 8000
+# then visit http://localhost:8000
+```
 
 ## Structure
 
 ```
-index.html    — single-page site (hero / about / work / projects / stack / contact)
-styles.css    — design system: paper #F2EFE6 + ink #101010 + ultramarine #2A1FEA,
-                Archivo variable (wght 100–900 × wdth 62–125) / Instrument Serif / Space Mono
-main.js       — all interactions; degrades under prefers-reduced-motion and on touch
-assets/       — résumé PDF
-netlify.toml  — publish config (no build step)
+index.html                  # main page
+css/style.css               # palette theme, coverflows, constellation, components
+js/main.js                  # video quality, coverflows, constellation, quick menu
+assets/nyc-sunset-4k.mp4    # hero video, 3840×2160 (~20 MB)
+assets/nyc-sunset-hd.mp4    # 1080p fallback (~5 MB)
+assets/world-map.svg        # themed world map for the About places map (~120 KB)
 ```
 
-## Run locally
+Hero footage: "Drone Footage of New York City Skyline" by Advancer Drones on Pexels (free for commercial use, no attribution required).
 
-Open `index.html` in a browser, or serve the folder:
+World map: made with Natural Earth (naturalearthdata.com) 1:110m country data, which is in the public domain; projected to equirectangular and colored to this site's palette.
 
-```bash
-python3 -m http.server 8000
-# → http://localhost:8000
+## Deploying
+
+Live at **https://bryanmejiaportfolio.pages.dev** (Cloudflare Pages, project `bryanmejiaportfolio`, direct upload).
+
+To publish an update, stage the site into `dist/` (everything except the full-res originals in `media/images/`) and deploy:
+
+```powershell
+# stage
+Remove-Item dist -Recurse -Force; New-Item -ItemType Directory dist | Out-Null
+Copy-Item index.html dist
+"css","js","assets" | ForEach-Object { Copy-Item $_ "dist\$_" -Recurse }
+New-Item -ItemType Directory dist\media | Out-Null
+Copy-Item media\web dist\media\web -Recurse
+Copy-Item media\videos dist\media\videos -Recurse
+
+# deploy
+npx wrangler pages deploy dist --project-name bryanmejiaportfolio
 ```
 
-## Deploy
-
-No build step — point any static host at the repo root.
-
-- **Netlify**: “Add new site → Import an existing project” → pick this repo.
-  Build command: *(leave empty)* · Publish directory: `.` (`netlify.toml` already sets this).
-- **Cloudflare Pages**: “Create a project” → connect this repo → no build command,
-  output directory `/`.
-- **GitHub Pages**: Settings → Pages → deploy from `main`, root folder.
-
-Every push to `main` redeploys automatically once the git integration is connected.
-
-## Updating content
-
-All content lives in `index.html` — sections are marked with
-`<!-- ============ SECTION ============ -->` comments. Replace
-`assets/BRYAN_MEJIA_RESUME.pdf` to update the résumé link.
+`media/images/` (original photos) is deliberately excluded; the site only uses the optimized `media/web/` copies. A custom domain can be attached in the Cloudflare dashboard under Workers & Pages → bryanmejiaportfolio → Custom domains. Small screens automatically get the 5 MB 1080p hero video instead of the 20 MB 4K one.
