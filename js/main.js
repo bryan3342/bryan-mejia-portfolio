@@ -1,6 +1,6 @@
 /* ============================================================
    Bryan Mejia; Portfolio v4.2 "SUNSET OVER NEW YORK"
-   4K video hero (1080p fallback chain), light scroll handler
+   1080p video hero (720p fallback chain), light scroll handler
    (nav + scrollspy only), reveals, counters, skill bars,
    accordions, quick menu, NYC clock.
    ============================================================ */
@@ -21,13 +21,12 @@
     toastTimer = setTimeout(() => toastEl.classList.remove("show"), 2800);
   }
 
-  /* ---------- hero video: 1080p default, 720p on small/data-saver ---------- */
+  /* ---------- hero video: always-on background loop, no pause control ---------- */
   const hero = document.getElementById("hero");
   const video = document.getElementById("hero-video");
-  const videoToggle = document.getElementById("video-toggle");
 
-  // markup default is the 1.4MB 1080p loop; a poster paints instantly while it
-  // buffers. Downgrade to the 0.6MB 720p file on small screens or data saver.
+  // markup default is the 1.4MB 1080p loop; downgrade to the 0.6MB 720p file
+  // on small screens or data saver.
   const saveData = navigator.connection && navigator.connection.saveData;
   if (window.innerWidth < 1100 || saveData) {
     video.src = "assets/nyc-sunset-720.mp4";
@@ -43,24 +42,13 @@
     }
   });
 
-  // Label follows real playback state, so the button can never contradict the
-  // video: a rejected play() used to leave it reading "pause" while paused,
-  // which made the first click a no-op.
-  const syncToggle = () => {
-    const playing = !video.paused;
-    videoToggle.textContent = playing ? "⏸" : "▶";
-    videoToggle.setAttribute("aria-label", playing ? "Pause background video" : "Play background video");
-  };
-  video.addEventListener("play", syncToggle);
-  video.addEventListener("pause", syncToggle);
-
-  // Browsers exempt muted inline video from the autoplay block, but still
-  // refuse while the tab is hidden or the device is in low-power mode. Those
-  // conditions lift later, so retry on the events that lift them instead of
-  // treating the first rejection as final.
-  let userPaused = false;
+  // The hero loop is meant to run unconditionally — no pause button, and it
+  // resumes itself if anything stops it. Muted inline video is exempt from the
+  // autoplay block, but browsers still refuse while the tab is hidden or the
+  // device is in Low Power Mode, so we retry on the events that can lift that.
+  let lastPlayAttempt = 0;
   function tryPlay() {
-    if (userPaused) return;
+    lastPlayAttempt = performance.now();
     const p = video.play();
     if (p) p.catch(() => {});
   }
@@ -69,20 +57,29 @@
   video.playsInline = true; // reloads the element
   tryPlay();
   video.addEventListener("canplay", tryPlay);
+
+  // Resume if anything pauses it, but at most once per second. A browser that is
+  // actively refusing playback (Low Power Mode) re-pauses instantly, and resuming
+  // on every such pause would ping-pong and drain the very battery Low Power Mode
+  // is protecting. One coalesced timer re-checks after the window so a pause that
+  // arrives mid-throttle still recovers.
+  let resumeTimer = null;
+  function keepPlaying() {
+    if (resumeTimer || !video.paused) return;
+    const dt = performance.now() - lastPlayAttempt;
+    if (dt >= 1000) { tryPlay(); return; }
+    resumeTimer = setTimeout(() => { resumeTimer = null; keepPlaying(); }, 1000 - dt);
+  }
+  video.addEventListener("pause", keepPlaying);
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden) tryPlay();
   });
-  // Last resort: any gesture satisfies even the strictest autoplay policy.
+  // Last resort for the strictest policies (Safari in Low Power Mode, which no
+  // script can override): the visitor's first interaction is a user gesture and
+  // lets playback begin.
   ["pointerdown", "keydown", "touchstart", "scroll"].forEach((evt) =>
     window.addEventListener(evt, tryPlay, { once: true, passive: true })
   );
-
-  videoToggle.addEventListener("click", () => {
-    userPaused = !video.paused;
-    if (video.paused) tryPlay();
-    else video.pause();
-  });
-  syncToggle();
 
   /* ---------- light scroll handler: nav, scrollspy, coverflows ---------- */
   const cfUpdaters = []; // scroll-driven coverflow updaters register here

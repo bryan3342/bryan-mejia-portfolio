@@ -1,7 +1,7 @@
 /* ============================================================
    Bryan Mejia; Portfolio v4.2 "SUNSET OVER NEW YORK"
-   · Hero = real 4K NYC sunset video (assets/nyc-sunset-4k.mp4,
-     1080p fallback chosen by JS); the only rich layer.
+   · Hero = real NYC sunset video (assets/nyc-sunset-1080.mp4,
+     720p fallback chosen by JS); the only rich layer.
    · The rest of the site is deliberately separate: a flat,
      light cream scheme with zero heavy effects, so nothing
      below the hero can lag.
@@ -251,25 +251,6 @@ body {
   transition: color 0.2s ease, border-color 0.2s ease;
 }
 .hero-social a:hover { color: #ffab73; border-color: #ffab73; }
-
-.video-toggle {
-  position: absolute;
-  right: 18px;
-  /* clears the fixed .clock-chip (bottom:16px, ~31px tall), which is z-index 90
-     and would otherwise sit on top of this button and swallow its clicks */
-  bottom: 62px;
-  z-index: 2;
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 155, 84, 0.5);
-  background: rgba(38, 4, 14, 0.35);
-  color: rgba(255, 155, 84, 0.9);
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease;
-}
-.video-toggle:hover { background: rgba(38, 4, 14, 0.55); border-color: #fff; }
-.hero.no-video .video-toggle { display: none; }
 
 /* entrance rise for hero elements (one-time, cheap) */
 .rise {
