@@ -21,21 +21,22 @@
     toastTimer = setTimeout(() => toastEl.classList.remove("show"), 2800);
   }
 
-  /* ---------- hero video: 4K on big screens, 1080p elsewhere ---------- */
+  /* ---------- hero video: 1080p default, 720p on small/data-saver ---------- */
   const hero = document.getElementById("hero");
   const video = document.getElementById("hero-video");
   const videoToggle = document.getElementById("video-toggle");
 
-  // markup default is 4K; downgrade for small screens or data saver
+  // markup default is the 1.4MB 1080p loop; a poster paints instantly while it
+  // buffers. Downgrade to the 0.6MB 720p file on small screens or data saver.
   const saveData = navigator.connection && navigator.connection.saveData;
   if (window.innerWidth < 1100 || saveData) {
-    video.src = "assets/nyc-sunset-hd.mp4";
+    video.src = "assets/nyc-sunset-720.mp4";
   }
 
   video.addEventListener("error", () => {
     // fall back down the quality chain before giving up on the video
-    if (video.currentSrc && video.currentSrc.includes("4k")) {
-      video.src = "assets/nyc-sunset-hd.mp4";
+    if (video.currentSrc && video.currentSrc.includes("1080")) {
+      video.src = "assets/nyc-sunset-720.mp4";
       tryPlay();
     } else {
       hero.classList.add("no-video");

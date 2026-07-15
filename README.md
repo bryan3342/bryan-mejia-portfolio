@@ -2,13 +2,13 @@
 
 An interactive single-page portfolio built with vanilla HTML, CSS, and JavaScript — no build step, no dependencies.
 
-**Design language: "Sunset over New York."** The landing hero is a real Ultra HD 4K aerial video of Manhattan at sunset — deliberately the only rich layer on the page. Everything below it switches to a flat, light cream scheme with zero heavy effects, so nothing outside the hero can lag. A soft pastel NYC skyline silhouette closes the page.
+**Design language: "Sunset over New York."** The landing hero is a real 1080p aerial video of Manhattan at sunset — deliberately the only rich layer on the page. Everything below it switches to a flat, light cream scheme with zero heavy effects, so nothing outside the hero can lag. A soft pastel NYC skyline silhouette closes the page.
 
 Built for performance: no fixed compositing layers, no backdrop blurs, no per-frame JS painting, no gradient repaints. The only continuous work is the hero video itself (pausable) and the pipeline packets (which stop when the diagram is off-screen).
 
 ## Interactive features
 
-- **Ultra HD 4K NYC sunset video hero** (`assets/nyc-sunset-4k.mp4`, 3840×2160) with autoplay/loop and a pause control; JS swaps to the 1080p file on small screens or data-saver connections, falls back down the quality chain on load errors, shows a sunset gradient if video fails entirely, and stays paused under reduced motion
+- **1080p NYC sunset video hero** (`assets/nyc-sunset-1080.mp4`, 1920×1080, ~1.4 MB) with autoplay/loop, a poster frame (`assets/nyc-sunset-poster.jpg`) that paints instantly while the video buffers, and a pause control; JS swaps to the 720p file on small screens or data-saver connections, falls back down the quality chain on load errors, and shows a sunset gradient if video fails entirely
 - **Light editorial body** — flat rose-cream, Playfair Display + Manrope, soft cards; visually separated from the cinematic hero; sections organized by title alone (no numbering)
 - **Color palette** — Night Bordeaux `#4F000B` (ink), Dark Amaranth `#720026`, Amaranth `#CE4257` (primary accent), Coral Glow `#FF7F51`, Sandy Brown `#FF9B54` (all light surfaces; no white anywhere), over warm rose-cream backgrounds
 - **3D skill constellation** — a slowly rotating sphere of all 38 skills (Fibonacci-distributed, color-coded into AI & Agentic Systems / Languages & Frameworks / Cloud & Infrastructure) spanning the full viewport width, with the editorial rail and group legend hugging the left edge; hovering a skill slows the rotation, highlights it, and shows its description in the rail; hovering a legend group dims the others. The rotation loop pauses off-screen and under reduced motion
@@ -36,8 +36,9 @@ python -m http.server 8000
 index.html                  # main page
 css/style.css               # palette theme, coverflows, constellation, components
 js/main.js                  # video quality, coverflows, constellation, quick menu
-assets/nyc-sunset-4k.mp4    # hero video, 3840×2160 (~20 MB)
-assets/nyc-sunset-hd.mp4    # 1080p fallback (~5 MB)
+assets/nyc-sunset-1080.mp4  # hero video, 1920×1080 (~1.4 MB)
+assets/nyc-sunset-720.mp4   # 720p fallback for small screens (~0.6 MB)
+assets/nyc-sunset-poster.jpg # hero poster frame, shown instantly (~230 KB)
 assets/world-map.svg        # themed world map for the About places map (~120 KB)
 ```
 
@@ -64,4 +65,4 @@ Copy-Item media\videos dist\media\videos -Recurse
 npx wrangler pages deploy dist --project-name bryanmejiaportfolio
 ```
 
-`media/images/` (original photos) is deliberately excluded; the site only uses the optimized `media/web/` copies. A custom domain can be attached in the Cloudflare dashboard under Workers & Pages → bryanmejiaportfolio → Custom domains. Small screens automatically get the 5 MB 1080p hero video instead of the 20 MB 4K one.
+`media/images/` (original photos) is deliberately excluded; the site only uses the optimized `media/web/` copies. A custom domain can be attached in the Cloudflare dashboard under Workers & Pages → bryanmejiaportfolio → Custom domains. Small screens and data-saver connections automatically get the 0.6 MB 720p hero video instead of the 1.4 MB 1080p one, and a poster frame paints instantly on every device while the video buffers.
